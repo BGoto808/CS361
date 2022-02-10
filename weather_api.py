@@ -3,7 +3,6 @@
 #    a city and obtains the current weather of that city
 #
 # Author: Bryson Goto, 2/10/2022
-# 
 #########################################################
 
 # Importing libraries
