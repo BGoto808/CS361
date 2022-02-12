@@ -6,7 +6,7 @@
 #########################################################
 
 # Importing libraries
-import requests, json
+import requests, json, climage
 
 # Base URL
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather?"
@@ -44,10 +44,13 @@ if response.status_code == 200:
    # Printing weather information
    report = data['weather']
    print(f"{CITY:-^30}")
-   print(f"Temperature: {temperature}")
-   print(f"Humidity: {humidity}")
-   print(f"Pressure: {pressure}")
+   print(f"Temperature: {temperature} *F")
+   print(f"Humidity: {humidity} %RH")
+   print(f"Pressure: {pressure} kPa")
    print(f"Weather Report: {report[0]['description']}")
+
+   # To Do: Implement microservice to return and print image of
+   #     city, state, or country
 else:
    # Prints error message
    print("Error in the HTTP request")
