@@ -1,9 +1,9 @@
-#########################################################
-# Weather_api.py: Program that allows the user to input
-#    a city and obtains the current weather of that city
+##############################################################
+# Weather_api.py: Program that allows the user to input a
+#   location and obtains the current weather of that location 
 #
-# Author: Bryson Goto, 2/10/2022
-#########################################################
+# Author: Bryson Goto, 2/21/2022
+##############################################################
 
 # Importing libraries
 import requests, json, climage
@@ -12,7 +12,7 @@ import requests, json, climage
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather?"
 
 # User inputs a city
-CITY = input("Enter a city: ")
+CITY = input("Enter a location: ")
 
 # API key for WeatherMap
 API_KEY = "9fe048215c91d6c4f2f280b4e0b8cb5c"
