@@ -47,10 +47,12 @@ def get_timezone(num):
 given_date = datetime.datetime.now()
 
 # This is the timezone where the date/time was recorded
+# Change parameter depending on time zone:
 source_ianatimezone = get_timezone(1)
 tz_from = pytz.timezone(source_ianatimezone)
 
 # This is the timezone to which I want to convert the above date/time
+# Change parameter depending on time zone: 
 target_ianatimezone = get_timezone(6)
 to_tz = pytz.timezone(target_ianatimezone)
 
