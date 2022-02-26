@@ -1,8 +1,10 @@
 ##############################################################
 # Weather_api.py: Program that allows the user to input a
 #   location and obtains the current weather of that location 
+#   Uses wiki image scrapper microservice to display the image
+#   of that city
 #
-# Author: Bryson Goto, 2/21/2022
+# Author: Bryson Goto, 2/25/2022
 ##############################################################
 
 # Importing libraries
@@ -11,6 +13,8 @@ from requests import get
 import json, climage
 import urllib.request
 from PIL import Image
+import subprocess
+import scrape_image 
 
 # Base URL
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather?"
@@ -53,14 +57,14 @@ if response.status_code == 200:
    print(f"Pressure: {pressure} kPa")
    print(f"Weather Report: {report[0]['description']}")
 
-   # To Do: Implement microservice to return and print image of
-   #     city, state, or country
-   #urllib.request.urlretrieve(
-   #'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/800px-Flag_of_Canada_%28Pantone%29.svg.png',
-   #'image.png')
+   # Gets image of city and displays it using microservice
+   page_id = scrape_image.get_wiki_page_id(CITY)
+   image_url = scrape_image.get_wiki_image_url(page_id)
 
-   #img = Image.open('image.png');
-   #img.show()
+   urllib.request.urlretrieve(image_url, 'image.png')
+
+   img = Image.open('image.png')
+   img.show()
 
 else:
    # Prints error message
