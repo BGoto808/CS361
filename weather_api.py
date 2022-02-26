@@ -6,7 +6,11 @@
 ##############################################################
 
 # Importing libraries
-import requests, json, climage
+import requests
+from requests import get
+import json, climage
+import urllib.request
+from PIL import Image
 
 # Base URL
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather?"
@@ -51,6 +55,13 @@ if response.status_code == 200:
 
    # To Do: Implement microservice to return and print image of
    #     city, state, or country
+   #urllib.request.urlretrieve(
+   #'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/800px-Flag_of_Canada_%28Pantone%29.svg.png',
+   #'image.png')
+
+   #img = Image.open('image.png');
+   #img.show()
+
 else:
    # Prints error message
    print("Error in the HTTP request")

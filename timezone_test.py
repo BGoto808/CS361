@@ -7,53 +7,60 @@
 
 import pytz
 import datetime
+import getopt
+import sys
 
 def get_timezone(num):
     if num == 1: # WAT
-        source_ianatimezone = 'Africa/Bangui'
+        timezone = 'Africa/Bangui'
     if num == 2: # AT
-        source_ianatimezone = 'America/Puerto_Rico'
+        timezone = 'America/Puerto_Rico'
     if num == 3: # ET
-        source_ianatimezone = 'America/Detroit'
+        timezone = 'America/Detroit'
     if num == 4: # CT
-        source_ianatimezone = 'America/Costa_Rica'
+        timezone = 'America/Costa_Rica'
     if num == 5: # MT
-        source_ianatimezone = 'America/Boise'
+        timezone = 'America/Boise'
     if num == 6: # PT
-        source_ianatimezone = 'America/Los_Angeles'
+        timezone = 'America/Los_Angeles'
     if num == 7: # AKST
-        source_ianatimezone = 'America/Juneau'
+        timezone = 'America/Juneau'
     if num == 8: # HST
-        source_ianatimezone = 'Pacific/Honolulu'
+        timezone = 'Pacific/Honolulu'
     if num == 9: # SST
-        source_ianatimezone = 'Pacific/Pago_Pago'
+        timezone = 'Pacific/Pago_Pago'
     if num == 10: # GMT
-        source_ianatimezone = 'Europe/London'
+        timezone = 'Europe/London'
     if num == 11: # CET
-        source_ianatimezone = 'Europe/Berlin'
+        timezone = 'Europe/Berlin'
     if num == 12: # EET
-        source_ianatimezone = 'Europe/Riga'
+        timezone = 'Europe/Riga'
     if num == 13: # MSK 
-        source_ianatimezone = 'Europe/Minsk'
+        timezone = 'Europe/Minsk'
     if num == 14: # AWST
-        source_ianatimezone = 'Australia/Perth'
+        timezone = 'Australia/Perth'
     if num == 15: # ACST
-        source_ianatimezone = 'Australia/Darwin'
+        timezone = 'Australia/Darwin'
     if num == 16: # AEST
-        source_ianatimezone = 'Australia/Brisbane'
+        timezone = 'Australia/Brisbane'
 
-    return source_ianatimezone
+    return timezone  
 
+# Command line arguments: python <file_name> <original_timezone> <timezone_to_convert_to>
 given_date = datetime.datetime.now()
 
+#given_date = sys.argv[0]
+original_tz = (sys.argv[1])
+converted_tz = (sys.argv[2])
+
 # This is the timezone where the date/time was recorded
-# Change parameter depending on time zone:
-source_ianatimezone = get_timezone(1)
+source_ianatimezone = get_timezone(int(original_tz))
+
 tz_from = pytz.timezone(source_ianatimezone)
 
 # This is the timezone to which I want to convert the above date/time
-# Change parameter depending on time zone: 
-target_ianatimezone = get_timezone(6)
+target_ianatimezone = get_timezone(int(converted_tz))
+
 to_tz = pytz.timezone(target_ianatimezone)
 
 print("Converting given date: ", given_date, " from: ",source_ianatimezone, " to: ", target_ianatimezone)
@@ -66,3 +73,8 @@ convert_with_to_tz = tz_from.localize(given_date, is_dst=True).astimezone(to_tz)
 
 print("Localized value: ", localize_with_from_tz)
 print("After converting: ", convert_with_to_tz)
+
+# Writing the converted time to .txt file
+file = open("converted_time.txt", "w")
+file.write(convert_with_to_tz.strftime("%m/%d/%y %I:%M:%S %p"))
+file.close()
