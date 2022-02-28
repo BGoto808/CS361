@@ -4,7 +4,7 @@
 #   Uses wiki image scrapper microservice to display the image
 #   of that city
 #
-# Author: Bryson Goto, 2/25/2022
+# Author: Bryson Goto, 2/27/2022
 ##############################################################
 
 # Importing libraries
@@ -58,12 +58,22 @@ if response.status_code == 200:
    print(f"Weather Report: {report[0]['description']}")
 
    # Gets image of city and displays it using microservice
-   page_id = scrape_image.get_wiki_page_id(CITY)
-   image_url = scrape_image.get_wiki_image_url(page_id)
+   # Make request to API endpiont
+   response = get(
+      url="http://flip1.engr.oregonstate.edu:1876/" + CITY
+   )
 
-   urllib.request.urlretrieve(image_url, 'image.png')
+   # Convert response to dict object
+   response = response.json()
 
-   img = Image.open('image.png')
+   #Get URL item
+   response_url = response["url"]
+
+   urllib.request.urlretrieve(
+      response_url,
+      'image.png')
+
+   img = Image.open('image.png');
    img.show()
 
 else:
