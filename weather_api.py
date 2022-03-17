@@ -7,7 +7,6 @@
 # Author: Bryson Goto, 2/27/2022
 ##############################################################
 
-# Importing libraries
 import requests
 from requests import get
 import json, climage
@@ -43,10 +42,8 @@ if response.status_code == 200:
    temperature = main['temp']
    temperature = int(temperature * 1.8 - 459.67)
 
-   # Getting the humidity
+   # Getting the humidity and pressure
    humidity = main['humidity']
-
-   # Getting the pressure
    pressure = main['pressure']
 
    # Printing weather information
@@ -66,7 +63,7 @@ if response.status_code == 200:
    # Convert response to dict object
    response = response.json()
 
-   #Get URL item
+   # Get URL item
    response_url = response["url"]
 
    urllib.request.urlretrieve(
